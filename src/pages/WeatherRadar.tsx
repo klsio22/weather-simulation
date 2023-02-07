@@ -1,54 +1,77 @@
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { CloudSun } from 'phosphor-react';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ButtonBack } from '../components/ButtonBack';
+import { NotFound } from '../components/NotFound';
 import { Search } from '../components/Search';
 import { useApiWetherRadar } from '../data/useApiWetherRadar';
 
-type infoWeather = {
-  temp: number;
-  temp_max: number;
-  temp_min: number;
-  humidity: number;
-  sunrise: number;
-  sunset: number;
-};
-
 export function WeatherRadar() {
-  const [time, setData] = useState(true);
+
+  const navigate = useNavigate();
+
+  const { datesWeather, loading, error } = useApiWetherRadar();
   const dateCurrent = new Date();
-  const {datesWeather}= useApiWetherRadar()
+  const minimumTemperature = Number(datesWeather?.main.temp_min).toFixed(0);
+  const maximumTemperature = Number(datesWeather?.main.temp_max).toFixed(0);
+  const currencyTemperature = Number(datesWeather?.main.temp).toFixed(0);
+  const humidity = datesWeather?.main.humidity;
+
+  const sunriseTime = new Date(
+    Number(datesWeather?.sys.sunrise) * 1000
+  ).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const sunsetTime = new Date(
+    Number(datesWeather?.sys.sunset) * 1000
+  ).toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const weatherDescription = datesWeather?.weather[0].description;
+
+  const formattedDate = format(dateCurrent, "iiii, dd 'de' MMMM 'de' yyyy ", {
+    locale: ptBR,
+  });
+
+  if (loading) return <Search />;
+  
+  if (error) return <NotFound />;
 
 
-  setTimeout(() => {
-    setData(false);
-  }, 1000);
+    navigate({ pathname: './some/path' })
 
-  if (time) return <Search />;
-
-  console.log(datesWeather)
 
   return (
     <div className='w-1/2'>
       <div className='px-6'>
         <div className='flex flex-col items-center'>
-          <h3 className='text-2xl font-medium'>Cidade, UF</h3>
-          <span className='text-zinc-700'>{dateCurrent.toDateString()}</span>
+          <h3 className='text-2xl font-medium'>
+            {datesWeather?.name}, {datesWeather?.sys.country}
+          </h3>
+          <span className='text-zinc-700 normal-case'>{formattedDate}</span>
         </div>
 
         <div className='flex items-center gap-10 justify-center'>
           <div className='flex flex-col items-center'>
             <span className='text-sm'>Minima</span>
-            <span className='text-2xl'>21 °C</span>
+            <span className='text-2xl'>{minimumTemperature}°C</span>
           </div>
 
           <div className='flex flex-col items-center text-4xl font-semibold'>
             <CloudSun size={120} />
-            <p className='text-4xl font-semibold'>28 °C</p>
-            <span className='text-3xl font-medium'>Parcialmente Nublado</span>
+            <p className='text-4xl font-semibold'>{currencyTemperature}°C</p>
+            <span className='text-3xl font-medium capitalize'>
+              {weatherDescription}
+            </span>
           </div>
           <div className='flex flex-col items-center'>
             <span className='text-sm'>Maxima</span>
-            <span className='text-2xl'>28 °C</span>
+            <span className='text-2xl'>{maximumTemperature}°C</span>
           </div>
         </div>
       </div>
@@ -58,21 +81,15 @@ export function WeatherRadar() {
       <div className='flex justify-center '>
         <div className='grid grid-cols-2 gap-2 w-[35%] ml-20'>
           <span>Umidade</span>
-          <span>20%</span>
+          <span>{humidity}%</span>
           <span>Nascer do Sol</span>
-          <span>6:30</span>
+          <span>{sunriseTime}</span>
           <span>Por do sol</span>
-          <span>20:10</span>
+          <span>{sunsetTime}</span>
         </div>
       </div>
 
-      <div className='text-center mt-5 text-white font-medium text-lg'>
-        <Link to={'/'}>
-          <button className='border rounded border-zinc-600 p-2 bg-slate-500 '>
-            Fazer mais consultas
-          </button>
-        </Link>
-      </div>
+      <ButtonBack />
     </div>
   );
 }

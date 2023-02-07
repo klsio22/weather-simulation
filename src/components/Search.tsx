@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import ReactLoading from 'react-loading';
-import { Link, useHref } from 'react-router-dom';
 
 export function Search() {
   return (
