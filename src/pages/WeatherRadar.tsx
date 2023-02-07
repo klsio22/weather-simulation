@@ -1,6 +1,17 @@
 import { CloudSun } from 'phosphor-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Search } from '../components/Search';
 
 export function WeatherRadar() {
+  const [time, setData] = useState(true);
+
+  setTimeout(() => {
+    setData(false);
+  }, 1000);
+
+  if (time) return <Search />;
+
   return (
     <div className='w-1/2'>
       <div className='px-6'>
@@ -32,7 +43,7 @@ export function WeatherRadar() {
       <hr className='border my-8' />
 
       <div className='flex justify-center '>
-        <div className='grid grid-cols-2 gap-2 w-[35%]'>
+        <div className='grid grid-cols-2 gap-2 w-[35%] ml-20'>
           <span>Umidade</span>
           <span>20%</span>
           <span>Nascer do Sol</span>
@@ -40,6 +51,14 @@ export function WeatherRadar() {
           <span>Por do sol</span>
           <span>20:10</span>
         </div>
+      </div>
+
+      <div className='text-center mt-5 text-white font-medium text-lg'>
+        <Link to={'/'}>
+          <button className='border rounded border-zinc-600 p-2 bg-slate-500 '>
+            Fazer mais consultas
+          </button>
+        </Link>
       </div>
     </div>
   );
