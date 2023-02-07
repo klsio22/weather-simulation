@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Home } from './pages/Home';
+import { CityProvider } from './context/CityProvider';
 import { Router } from './Router';
 
 export default function App() {

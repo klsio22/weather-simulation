@@ -2,9 +2,22 @@ import { CloudSun } from 'phosphor-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from '../components/Search';
+import { useApiWetherRadar } from '../data/useApiWetherRadar';
+
+type infoWeather = {
+  temp: number;
+  temp_max: number;
+  temp_min: number;
+  humidity: number;
+  sunrise: number;
+  sunset: number;
+};
 
 export function WeatherRadar() {
   const [time, setData] = useState(true);
+  const dateCurrent = new Date();
+  const {datesWeather}= useApiWetherRadar()
+
 
   setTimeout(() => {
     setData(false);
@@ -12,14 +25,14 @@ export function WeatherRadar() {
 
   if (time) return <Search />;
 
+  console.log(datesWeather)
+
   return (
     <div className='w-1/2'>
       <div className='px-6'>
         <div className='flex flex-col items-center'>
           <h3 className='text-2xl font-medium'>Cidade, UF</h3>
-          <span className='text-zinc-700'>
-            Dia da semana , 31 de Mês de 2019
-          </span>
+          <span className='text-zinc-700'>{dateCurrent.toDateString()}</span>
         </div>
 
         <div className='flex items-center gap-10 justify-center'>

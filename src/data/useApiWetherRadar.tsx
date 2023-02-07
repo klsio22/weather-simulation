@@ -1,20 +1,47 @@
-import { api } from '../lib/axios';
+import { useEffect, useState } from 'react';
+import { useNameCity } from '../context/CityProvider';
+import { apiWeather } from '../lib/apiOpenweathermap';
+
+type infoWeather = {
+  main: {
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+    humidity: number;
+  };
+  sys: {
+    sunrise: number;
+    sunset: number;
+  };
+}[];
 
 export function useApiWetherRadar() {
-  /* async function getWeather(city: string): Promise<any> {
+  const [datesWeather, setDatesWeather] = useState<infoWeather>();
+  const [loading, setLoading] = useState(false);
+  const { cityName } = useNameCity();
+
+  const API_KEY = '9f1ceab4993df5f5736c8cf2996d3718';
+
+  async function getWeather(city: string): Promise<any> {
     try {
-      const response = api.get(`${API_URL}${city}`);
-      return response.data;
+      await apiWeather
+        .get(`weather?appid=${API_KEY}&q=${city}&units=metric`)
+        .then((response) => {
+          console.log(response.data);
+          setDatesWeather(response.data);
+        })
+        .catch((error) => {
+          setLoading(true);
+          console.error(error);
+        });
     } catch (error) {
       console.error(error);
     }
   }
 
-  getWeather('London')
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    }); */
+  useEffect(() => {
+    getWeather(cityName);
+  }, []);
+
+  return { datesWeather, loading };
 }
