@@ -1,3 +1,5 @@
+import { Button } from "../components/Butoon";
+
 export function Home() {
 
   function searchForecast(){
@@ -17,9 +19,7 @@ export function Home() {
             placeholder='Busque por cidade'
           />
         </div>
-        <div className='bg-slate-800 py-3 px-5 text-white font-extrabold'>
-          <button>Procurar</button>
-        </div>
+        <Button/>
       </div>
     </div>
   );
