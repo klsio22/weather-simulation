@@ -33,14 +33,12 @@ export function useApiWetherRadar() {
   const { cityName } = useNameCity();
 
   const API_KEY = import.meta.env.VITE_API_KEY;
-  //const API_KEY = process.env.API_KEY;
-  //console.log(API_KEY);
 
   async function getWeather(city: string): Promise<void> {
     return apiWeather
       .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDatesWeather(response.data);
       })
       .catch((error) => {

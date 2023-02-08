@@ -10,7 +10,7 @@ export function Home() {
 
   const handleInput = () => {
     getCityName(inputValue);
-    console.log(cityName);
+    //console.log(cityName);
   };
   
   //console.log("input local",inputValue);
