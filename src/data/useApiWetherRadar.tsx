@@ -21,34 +21,34 @@ type infoWeather = {
 };
 
 export function useApiWetherRadar() {
-  const [datesWeather, setDatesWeather] = useState<infoWeather>();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [datesWeather, setDatesWeather] = useState<infoWeather>();
   const { cityName } = useNameCity();
 
   const API_KEY = '9f1ceab4993df5f5736c8cf2996d3718';
 
   async function getWeather(city: string): Promise<any> {
-    try {
-      await apiWeather
-        .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
-        .then((response) => {
-          setLoading(true);
-          console.log(response.data);
-          setDatesWeather(response.data);
-        })
-        .catch((error) => {
-          setLoading(true);
-          setError(true);
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
+    await apiWeather
+      .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
+      .then((response) => {
+        setLoading(false);
+
+        // console.log(response.data);
+        setDatesWeather(response.data);
+      })
+      .catch((error) => {
+        setLoading(true);
+        setError(true);
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
   }
 
   useEffect(() => {
-    getWeather(cityName);
+    setTimeout(() => {
+      getWeather(cityName);
+    }, 500);
   }, []);
 
   return { datesWeather, loading, error };

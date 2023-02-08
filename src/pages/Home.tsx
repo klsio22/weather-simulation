@@ -13,7 +13,7 @@ export function Home() {
     console.log(cityName);
   };
   
-  console.log("input local",inputValue);
+  //console.log("input local",inputValue);
   return (
     <div>
       <h2 className='text-4xl font-medium mb-5'>Previsão do tempo</h2>

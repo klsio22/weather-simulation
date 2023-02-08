@@ -6,7 +6,7 @@ type CityProviderProps = {
 
 type CityProviderContext = {
   cityName: string;
-  getCityName: (cityName: string) => void;
+  getCityName: (name: string) => void;
 };
 
 const CityContext = createContext({} as CityProviderContext);
