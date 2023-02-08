@@ -1,18 +1,20 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNameCity } from '../context/CityProvider';
-import { useApiWetherRadar } from '../data/useApiWetherRadar';
 
 export function Home() {
-  const { cityName, getCityName } = useNameCity();
-
+  const { getCityName } = useNameCity();
   const [inputValue, setInputValue] = useState<string>('');
+  let empty = false;
+
+  if (inputValue == '') empty = true;
 
   const handleInput = () => {
     getCityName(inputValue);
     //console.log(cityName);
   };
-  
+
   //console.log("input local",inputValue);
   return (
     <div>
@@ -25,14 +27,22 @@ export function Home() {
             className='border border-gray-700 rounded px-6 h-12 text-center'
             placeholder='Busque por cidade'
             value={inputValue}
-            onChange={(event)=> setInputValue(event.target.value)}
+            onChange={(event) => setInputValue(event.target.value)}
           />
         </div>
-        <div className='bg-slate-800 py-3 px-5 text-white font-extrabold'>
-          <Link to='/previsao-do-tempo'>
-            <button onClick={handleInput}>Procurar</button>
-          </Link>
-        </div>
+
+        <Link className='' to='/previsao-do-tempo'>
+          <button
+            onClick={handleInput}
+            className={clsx(
+              'bg-slate-800 py-3 px-5 text-white font-extrabold rounded',
+              { 'cursor-not-allowed': empty }
+            )}
+            disabled={empty}
+          >
+            Procurar
+          </button>
+        </Link>
       </div>
     </div>
   );
