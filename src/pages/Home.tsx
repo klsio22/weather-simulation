@@ -31,7 +31,7 @@ export function Home() {
           />
         </div>
 
-        <Link className='' to='/previsao-do-tempo'>
+        <Link to='/previsao-do-tempo'>
           <button
             onClick={handleInput}
             className={clsx(

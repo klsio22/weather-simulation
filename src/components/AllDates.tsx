@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { type } from 'os';
 import { CloudSun } from 'phosphor-react';
-import { useApiWetherRadar } from '../data/useApiWetherRadar';
+import { formatHour } from '../utilities/formatHour';
+import { formattedDate } from '../utilities/formattedDate';
 import { ButtonBack } from './ButtonBack';
 
 type AllDatesProps = {
@@ -34,20 +34,12 @@ export function AllDates({
   const maximumTemperature = Math.round(temp_max);
   const currencyTemperature = Math.round(temp);
 
-  const sunriseTime = new Date(sunrise * 1000).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const sunriseTime = formatHour(sunrise);
 
-  const sunsetTime = new Date(sunset * 1000).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  });
+  const sunsetTime = formatHour(sunset);
 
-  const formattedDate = format(dateCurrent, "iiii, dd 'de' MMMM 'de' yyyy ", {
-    locale: ptBR,
-  });
-
+  const formattedDateCurrent = formattedDate(dateCurrent)
+  
   return (
     <div className='w-1/2'>
       <div className='px-6'>
@@ -55,7 +47,7 @@ export function AllDates({
           <h3 className='text-2xl font-medium'>
             {name}, {country}
           </h3>
-          <span className='text-zinc-700 normal-case'>{formattedDate}</span>
+          <span className='text-zinc-700 normal-case'>{formattedDateCurrent}</span>
         </div>
 
         <div className='flex items-center gap-10 justify-center'>

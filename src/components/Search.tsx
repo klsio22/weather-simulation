@@ -6,18 +6,21 @@ import { useApiWetherRadar } from '../data/useApiWetherRadar';
 export function Search() {
   const { cityName } = useNameCity();
   const { datesWeather } = useApiWetherRadar();
-  
-  let empty = false;
-  if (cityName == '') empty = true;
+  const country = datesWeather.sys.country;
+
+  let empty = false, countryUF;
+
+  if (cityName === '') empty = true;
+  country === '' ? (countryUF = 'UF') : (countryUF = country);
 
   return (
     <div className='flex flex-col gap-8 items-center'>
-      <div className='border-2 border-zinc-700 rounded text-center px-16 py-1  m-4 text-xl'>
+      <div className='border-2 border-zinc-700 rounded text-center px-16 py-1  m-4 text-xl capitalize'>
         {empty ? (
           <span>Cidade, UF</span>
         ) : (
           <span>
-            {cityName}, {datesWeather?.sys.country}
+            {cityName}, {countryUF}
           </span>
         )}
       </div>

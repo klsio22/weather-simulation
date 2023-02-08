@@ -44,7 +44,7 @@ export function useApiWetherRadar() {
       .catch((error) => {
         setLoading(true);
         setError(true);
-        console.error(error);
+        //console.error(error);
       })
       .finally(() => setLoading(false));
   }
