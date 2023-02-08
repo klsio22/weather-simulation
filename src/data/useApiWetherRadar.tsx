@@ -23,18 +23,24 @@ type infoWeather = {
 export function useApiWetherRadar() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [datesWeather, setDatesWeather] = useState<infoWeather>();
+  const [datesWeather, setDatesWeather] = useState<infoWeather>({
+    name: '',
+    main: { temp: 0, temp_max: 0, temp_min: 0, humidity: 0 },
+    sys: { sunrise: 0, sunset: 0, country: '' },
+    weather: [{ description: '' }],
+  });
+
   const { cityName } = useNameCity();
 
-  const API_KEY = '9f1ceab4993df5f5736c8cf2996d3718';
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  //const API_KEY = process.env.API_KEY;
+  //console.log(API_KEY);
 
-  async function getWeather(city: string): Promise<any> {
-    await apiWeather
+  async function getWeather(city: string): Promise<void> {
+    return apiWeather
       .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
       .then((response) => {
-        setLoading(false);
-
-        // console.log(response.data);
+        console.log(response.data);
         setDatesWeather(response.data);
       })
       .catch((error) => {
@@ -46,9 +52,7 @@ export function useApiWetherRadar() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      getWeather(cityName);
-    }, 500);
+    getWeather(cityName);
   }, []);
 
   return { datesWeather, loading, error };
