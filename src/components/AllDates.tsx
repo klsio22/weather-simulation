@@ -1,5 +1,3 @@
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { CloudSun } from 'phosphor-react';
 import { formatHour } from '../utilities/formatHour';
 import { formattedDate } from '../utilities/formattedDate';
@@ -38,16 +36,18 @@ export function AllDates({
 
   const sunsetTime = formatHour(sunset);
 
-  const formattedDateCurrent = formattedDate(dateCurrent)
-  
+  const formattedDateCurrent = formattedDate(dateCurrent);
+
   return (
-    <div className='w-1/2'>
-      <div className='px-6'>
+    <div className=' lg:w-1/2'>
+      <div className='flex flex-col gap-5 px-6'>
         <div className='flex flex-col items-center'>
           <h3 className='text-2xl font-medium'>
             {name}, {country}
           </h3>
-          <span className='text-zinc-700 normal-case'>{formattedDateCurrent}</span>
+          <span className='text-zinc-700 normal-case'>
+            {formattedDateCurrent}
+          </span>
         </div>
 
         <div className='flex items-center gap-10 justify-center'>
@@ -72,18 +72,18 @@ export function AllDates({
 
       <hr className='border my-8' />
 
-      <div className='flex justify-center '>
-        <div className='grid grid-cols-2 gap-2 w-[35%] ml-20'>
-          <span>Umidade</span>
+      <div className='flex justify-center flex-col items-center m-auto lg:w-1/2'>
+        <div className='w-full grid grid-cols-2 gap-x-8 gap-y-1 border'>
+          <span className='text-end'>Umidade</span>
           <span>{humidity}%</span>
-          <span>Nascer do Sol</span>
+          <span className='text-end'>Nascer do Sol</span>
           <span>{sunriseTime}</span>
-          <span>Por do sol</span>
+          <span className='text-end'>Por do sol</span>
           <span>{sunsetTime}</span>
         </div>
-      </div>
 
-      <ButtonBack />
+        <ButtonBack />
+      </div>
     </div>
   );
 }
