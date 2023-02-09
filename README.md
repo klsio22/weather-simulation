@@ -35,7 +35,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-### ✈️ O objetivo desse projeto foi fazer o seguinte teste : 
+### ✈️ O objetivo desse projeto foi fazer o seguinte teste :
 
 #### REGRAS GERAIS
 - O projeto deve ser feito com algum framework web como Vue.js, React.
@@ -49,13 +49,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 Para conseguir realizar essa tarefa você deverá utilizar a popular api do OpenWeatherMap (http://openweathermap.org/). O mock das telas do que é desejável que tenha no aplicativo, você pode dar um toque seu no design/layout, o importante é exibir ao menos a informação básica do que for retornado pelo OpenWeatherMap.
 
-
-
-
 #### Seria desejável(não obrigatório)
 - Utilizar algum padrão arquitetural
 - Testes unitários
-
 
 #### O que iremos analisar:
 - Semântica Web.
@@ -90,4 +86,6 @@ A aplicação pode ser acessada em [`localhost:5174`](http://localhost:5174/) no
 
 obs: Para que o projeto funcionar corretamente no localhost deve-se se fazer o cadastro no site da https://openweathermap.org/ para gerar um Api-key, no caso existe uma api grátis , porém há limites de requisição faça a consulta na documentação antes de aplicar no projeto.
 
+- Caso queira acessar aplicação online está disponível nesse link : [weather-simulation](https://weather-simulation.vercel.app/)
+  
 -------

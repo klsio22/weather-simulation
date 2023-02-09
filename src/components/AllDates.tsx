@@ -33,9 +33,7 @@ export function AllDates({
   const currencyTemperature = Math.round(temp);
 
   const sunriseTime = formatHour(sunrise);
-
   const sunsetTime = formatHour(sunset);
-
   const formattedDateCurrent = formattedDate(dateCurrent);
 
   return (
@@ -59,7 +57,7 @@ export function AllDates({
           <div className='flex flex-col items-center text-4xl font-semibold'>
             <CloudSun size={120} />
             <p className='text-4xl font-semibold'>{currencyTemperature}°C</p>
-            <span className='text-3xl font-medium capitalize'>
+            <span className='text-3xl font-medium capitalize text-center'>
               {description}
             </span>
           </div>
