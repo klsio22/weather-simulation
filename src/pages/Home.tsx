@@ -1,11 +1,12 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNameCity } from '../context/CityProvider';
 
 export function Home() {
   const { getCityName } = useNameCity();
   const [inputValue, setInputValue] = useState<string>('');
+  const buttonRef = useRef<HTMLButtonElement>(null);
   let empty = false;
 
   if (inputValue == '') empty = true;
@@ -15,7 +16,15 @@ export function Home() {
     //console.log(cityName);
   };
 
-  //console.log("input local",inputValue);
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      if (buttonRef.current) {
+        buttonRef.current.click();
+      }
+      // console.log('Enter was pressed');
+    }
+  };
+
   return (
     <div>
       <h2 className='text-4xl font-medium mb-5'>Previsão do tempo</h2>
@@ -28,11 +37,13 @@ export function Home() {
             placeholder='Busque por cidade'
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
 
         <Link to='/previsao-do-tempo'>
           <button
+            ref={buttonRef}
             onClick={handleInput}
             className={clsx(
               'bg-slate-800 py-3 px-5 text-white font-extrabold rounded',

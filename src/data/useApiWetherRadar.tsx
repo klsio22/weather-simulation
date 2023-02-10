@@ -39,7 +39,7 @@ export function useApiWetherRadar() {
     return apiWeather
       .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setDatesWeather(response.data);
       })
       .catch((error) => {
