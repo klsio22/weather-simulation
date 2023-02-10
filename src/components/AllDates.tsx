@@ -56,12 +56,14 @@ export function AllDates({
           </div>
 
           <div className='flex flex-col items-center text-4xl font-semibold'>
-            {/* <CloudSun size={120} /> */}
-            <img
-              src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-              alt={`${description}`}
-              className='w-32'
-            />
+            <div className='w-32 h-32'>
+              <img
+                src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                alt={`${description}`}
+                className='w-32'
+              />
+            </div>
+
             <p className='text-4xl font-semibold'>{currencyTemperature}°C</p>
             <span className='text-3xl font-medium capitalize text-center'>
               {description}
