@@ -17,6 +17,7 @@ type AllDatesProps = {
     country: string;
   };
   weather: {
+    icon: string;
     description: string;
   }[];
 };
@@ -25,7 +26,7 @@ export function AllDates({
   name,
   main: { temp, temp_max, temp_min, humidity },
   sys: { country, sunrise, sunset },
-  weather: [{ description }],
+  weather: [{ description, icon }],
 }: AllDatesProps) {
   const dateCurrent = new Date();
   const minimumTemperature = Math.round(temp_min);
@@ -55,7 +56,12 @@ export function AllDates({
           </div>
 
           <div className='flex flex-col items-center text-4xl font-semibold'>
-            <CloudSun size={120} />
+            {/* <CloudSun size={120} /> */}
+            <img
+              src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+              alt={`${description}`}
+              className='w-32'
+            />
             <p className='text-4xl font-semibold'>{currencyTemperature}°C</p>
             <span className='text-3xl font-medium capitalize text-center'>
               {description}

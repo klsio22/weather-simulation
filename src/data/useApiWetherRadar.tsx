@@ -16,6 +16,7 @@ type infoWeather = {
     country: string;
   };
   weather: {
+    icon: string;
     description: string;
   }[];
 };
@@ -27,7 +28,7 @@ export function useApiWetherRadar() {
     name: '',
     main: { temp: 0, temp_max: 0, temp_min: 0, humidity: 0 },
     sys: { sunrise: 0, sunset: 0, country: '' },
-    weather: [{ description: '' }],
+    weather: [{ description: '', icon: '' }],
   });
 
   const { cityName } = useNameCity();
@@ -38,7 +39,7 @@ export function useApiWetherRadar() {
     return apiWeather
       .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
       .then((response) => {
-        //console.log(response.data);
+        console.log(response.data);
         setDatesWeather(response.data);
       })
       .catch((error) => {
