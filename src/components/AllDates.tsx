@@ -1,4 +1,5 @@
-import { CloudSun } from 'phosphor-react';
+import clsx from 'clsx';
+import { useActiveMode } from '../context/ActiveMode';
 import { formatHour } from '../utilities/formatHour';
 import { formattedDate } from '../utilities/formattedDate';
 import { ButtonBack } from './ButtonBack';
@@ -28,6 +29,7 @@ export function AllDates({
   sys: { country, sunrise, sunset },
   weather: [{ description, icon }],
 }: AllDatesProps) {
+  const { isActiveMode } = useActiveMode();
   const dateCurrent = new Date();
   const minimumTemperature = Math.round(temp_min);
   const maximumTemperature = Math.round(temp_max);
@@ -38,13 +40,17 @@ export function AllDates({
   const formattedDateCurrent = formattedDate(dateCurrent);
 
   return (
-    <div className=' lg:w-1/2'>
-      <div className='flex flex-col gap-5 px-6'>
+    <div className='lg:w-1/2'>
+      <div className='flex flex-col gap-3 px-6 lg:gap-5'>
         <div className='flex flex-col items-center'>
           <h3 className='text-2xl font-medium'>
             {name}, {country}
           </h3>
-          <span className='text-zinc-700 normal-case'>
+          <span
+            className={clsx('text-zinc-700 normal-case', {
+              'text-zinc-400': !isActiveMode,
+            })}
+          >
             {formattedDateCurrent}
           </span>
         </div>

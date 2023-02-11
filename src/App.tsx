@@ -1,21 +1,28 @@
+import clsx from 'clsx';
 import { BrowserRouter } from 'react-router-dom';
 import { SwitchButton } from './components/SwitchButton';
-import { ActiveModeProvider } from './context/ActiveMode';
+import {  useActiveMode } from './context/ActiveMode';
 import { CityProvider } from './context/CityContext';
 import { Router } from './Router';
 
 export default function App() {
+  const { isActiveMode } = useActiveMode();
+
+  //console.log(isActiveMode);
+
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div
+      className={clsx('flex items-center justify-center h-screen', {
+        'bg-slate-800 , text-zinc-200': !isActiveMode,
+      })}
+    >
       <BrowserRouter>
-        <ActiveModeProvider>
-          <div className='absolute top-2 right-2 lg:top-5'>
-            <SwitchButton />
-          </div>
-          <CityProvider>
-            <Router />
-          </CityProvider>
-        </ActiveModeProvider>
+        <div className='absolute top-2 right-2 lg:top-5'>
+          <SwitchButton />
+        </div>
+        <CityProvider>
+          <Router />
+        </CityProvider>
       </BrowserRouter>
     </div>
   );
