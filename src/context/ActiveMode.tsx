@@ -21,7 +21,7 @@ export const ActiveModeProvider = ({ children }: ActiveModeProviderProps) => {
 
   const activeDark = () => setIsActiveLight(false);
   const activeLight = () => setIsActiveLight(true);
-  let isActiveMode = isActiveLight;
+  const isActiveMode = isActiveLight;
 
   return (
     <ActiveContext.Provider value={{ activeDark, activeLight, isActiveMode }}>

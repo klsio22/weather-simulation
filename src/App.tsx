@@ -9,7 +9,7 @@ export default function App() {
     <div className='flex items-center justify-center h-screen'>
       <BrowserRouter>
         <ActiveModeProvider>
-          <div className='absolute top-5 '>
+          <div className='absolute top-2 right-2 lg:top-5'>
             <SwitchButton />
           </div>
           <CityProvider>

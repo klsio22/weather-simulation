@@ -1,28 +1,29 @@
 import * as Switch from '@radix-ui/react-switch';
+import { Moon } from 'phosphor-react';
 import { useActiveMode } from '../context/ActiveMode';
-
-type activeDarkProps = {};
 
 export function SwitchButton() {
   const { isActiveMode, activeDark, activeLight } = useActiveMode();
 
-  console.log(isActiveMode);
+  //console.log(isActiveMode);
 
   function switchMode() {
-    !isActiveMode ? activeDark : activeLight;
-
-    console.log(isActiveMode);
+    isActiveMode ? activeDark() : activeLight();
   }
 
   return (
-    <div className='flex items-center' onClick={switchMode}>
+    <div className='flex items-center gap-4' onClick={switchMode}>
       <Switch.Root className='group' id='airplane-mode'>
-        <div className='flex items-center w-[42px] h-[25px] bg-[#00000070] border rounded-full relative shadow-md  group-data-[state=checked]:bg-slate-900  border-'>
-          <Switch.Thumb className='block w-[21px] h-[21px] bg-white rounded-full shadow-stone-800 transition translate-x-0 will-change-transform group-data-[state=checked]:translate-x-5 group-data-[state=checked]' />
+        <div className='flex items-center justify-between px-1 w-16 h-8 bg-[#00000070] border rounded-full relative shadow-md  group-data-[state=checked]:bg-slate-900  border-'>
+          <Switch.Thumb className='block w-[25px] h-[25px] bg-white rounded-full shadow-stone-800 transition translate-x-0 will-change-transform group-data-[state=checked]:translate-x-7 group-data-[state=checked]' />
+          <Moon aria-details='Lua' size={20} />
         </div>
       </Switch.Root>
 
-      <label className='Label text-base font-medium' htmlFor='airplane-mode'>
+      <label
+        className='Label text-base font-semibold w-16 uppercase'
+        htmlFor='airplane-mode'
+      >
         Modo escuro
       </label>
     </div>
