@@ -1,21 +1,30 @@
 import * as Switch from '@radix-ui/react-switch';
+import { useActiveMode } from '../context/ActiveMode';
+
+type activeDarkProps = {};
 
 export function SwitchButton() {
-  return (
-    <div className='flex items-center '>
-      <label
-        className='Label'
-        htmlFor='airplane-mode'
-        style={{ paddingRight: 15 }}
-      >
-        Modo escuro
-      </label>
+  const { isActiveMode, activeDark, activeLight } = useActiveMode();
 
+  console.log(isActiveMode);
+
+  function switchMode() {
+    !isActiveMode ? activeDark : activeLight;
+
+    console.log(isActiveMode);
+  }
+
+  return (
+    <div className='flex items-center' onClick={switchMode}>
       <Switch.Root className='group' id='airplane-mode'>
         <div className='flex items-center w-[42px] h-[25px] bg-[#00000070] border rounded-full relative shadow-md  group-data-[state=checked]:bg-slate-900  border-'>
           <Switch.Thumb className='block w-[21px] h-[21px] bg-white rounded-full shadow-stone-800 transition translate-x-0 will-change-transform group-data-[state=checked]:translate-x-5 group-data-[state=checked]' />
         </div>
       </Switch.Root>
+
+      <label className='Label text-base font-medium' htmlFor='airplane-mode'>
+        Modo escuro
+      </label>
     </div>
   );
 }

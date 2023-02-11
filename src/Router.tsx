@@ -8,5 +8,6 @@ export function Router() {
       <Route path='/' element={<Home />} />
       <Route path='/previsao-do-tempo' element={<WeatherRadar />} />
     </Routes>
+    
   );
 }

@@ -1,16 +1,21 @@
 import { BrowserRouter } from 'react-router-dom';
 import { SwitchButton } from './components/SwitchButton';
-import { CityProvider } from './context/CityProvider';
+import { ActiveModeProvider } from './context/ActiveMode';
+import { CityProvider } from './context/CityContext';
 import { Router } from './Router';
 
 export default function App() {
   return (
     <div className='flex items-center justify-center h-screen'>
       <BrowserRouter>
-        <div className='absolute top-5 '>
-          <SwitchButton />
-        </div>
-        <Router />
+        <ActiveModeProvider>
+          <div className='absolute top-5 '>
+            <SwitchButton />
+          </div>
+          <CityProvider>
+            <Router />
+          </CityProvider>
+        </ActiveModeProvider>
       </BrowserRouter>
     </div>
   );

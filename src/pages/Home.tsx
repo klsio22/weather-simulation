@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SwitchButton } from '../components/SwitchButton';
-import { useNameCity } from '../context/CityProvider';
+import { useNameCity } from '../context/CityContext';
 
 export function Home() {
   const { getCityName } = useNameCity();

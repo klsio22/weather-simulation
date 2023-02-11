@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import ReactLoading from 'react-loading';
-import { useNameCity } from '../context/CityProvider';
+import { useNameCity } from '../context/CityContext';
 import { useApiWetherRadar } from '../data/useApiWetherRadar';
 
-export function Search() {
+export function SearchCity() {
   const { cityName } = useNameCity();
   const { datesWeather } = useApiWetherRadar();
   const country = datesWeather.sys.country;

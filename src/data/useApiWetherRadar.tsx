@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNameCity } from '../context/CityProvider';
+import { useNameCity } from '../context/CityContext';
 import { apiWeather } from '../lib/apiOpenweathermap';
 
 type infoWeather = {
