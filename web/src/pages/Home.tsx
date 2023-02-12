@@ -44,7 +44,7 @@ export function Home() {
           />
         </div>
 
-        <Link to='/previsao-do-tempo'>
+        <Link to={`/previsao-do-tempo?city=${inputValue}`}>
           <button
             ref={buttonRef}
             onClick={handleInput}

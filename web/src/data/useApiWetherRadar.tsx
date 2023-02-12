@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNameCity } from '../context/CityContext';
 import { apiWeather } from '../lib/apiOpenweathermap';
@@ -33,9 +34,9 @@ export function useApiWetherRadar() {
 
   const { cityName } = useNameCity();
 
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  //const API_KEY = import.meta.env.VITE_API_KEY;
 
-  async function getWeather(city: string): Promise<void> {
+  /*   async function getWeather(city: string): Promise<void> {
     return apiWeather
       .get(`weather?appid=${API_KEY}&q=${city}&units=metric&lang=pt_br`)
       .then((response) => {
@@ -48,8 +49,35 @@ export function useApiWetherRadar() {
         //console.error(error);
       })
       .finally(() => setLoading(false));
-  }
+  } */
 
+  /*   useEffect(() => {
+    getWeather(cityName);
+  }, []); */
+
+  /*   async function fetchWeatherData(cityName: string) {
+    const response = await apiWeather.post('/previsao-do-tempo', {
+      city: cityName,
+    });
+
+    console.log(cityName);
+    return response.data;
+  } */
+
+  async function getWeather(city: string): Promise<void> {
+    return apiWeather
+      .get(`/previsao-do-tempo?city=${city}`)
+      .then((response) => {
+        console.log(response.data);
+        setDatesWeather(response.data);
+      })
+      .catch((error) => {
+        setLoading(true);
+        setError(true);
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
+  }
   useEffect(() => {
     getWeather(cityName);
   }, []);
