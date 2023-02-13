@@ -25,6 +25,11 @@ app.get('/previsao-do-tempo', async (req, res) => {
   }
 });
 
+
+app.get('/',(req,res)=>{
+  res.json('Hello World!');
+})
+
 app.listen(port, () => {
   console.log(`Backend rodando na porta ${port}`);
 });
