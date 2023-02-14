@@ -1,5 +1,15 @@
 {
-  "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
+  "name": "deploy-node-in-vercel",
+  "version": 2,
+  "public": true,
+  "build": {
+    "src": "build/index.js",
+    "use": "@vercel/node"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "build/index.js"
+    }
   ]
 }
