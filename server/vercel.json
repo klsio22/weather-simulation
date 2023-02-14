@@ -1,15 +1,13 @@
 {
-  "name": "deploy-node-in-vercel",
   "version": 2,
-  "public": true,
   "build": {
-    "src": "./dist/server.js",
+    "src": "src/server.ts",
     "use": "@vercel/node"
   },
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "src/server.ts"
     }
   ]
 }
