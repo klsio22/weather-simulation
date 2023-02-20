@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_URL = `http://localhost:3001`;
+const API_URL = `https://server-weather-simulation.vercel.app/`;
 
 export const apiWeather = axios.create({
   baseURL: `${API_URL}`,
