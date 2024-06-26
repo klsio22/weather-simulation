@@ -4,24 +4,24 @@ import { formatHour } from '../utilities/formatHour';
 import { formattedDate } from '../utilities/formattedDate';
 import { ButtonBack } from './ButtonBack';
 
-type AllDatesProps = {
+type AllDatesProps = Readonly<{
   name: string;
-  main: {
+  main: Readonly<{
     temp: number;
     temp_max: number;
     temp_min: number;
     humidity: number;
-  };
-  sys: {
+  }>;
+  sys: Readonly<{
     sunrise: number;
     sunset: number;
     country: string;
-  };
-  weather: {
+  }>;
+  weather: ReadonlyArray<{
     icon: string;
     description: string;
-  }[];
-};
+  }>;
+}>;
 
 export function AllDates({
   name,
@@ -40,10 +40,10 @@ export function AllDates({
   const formattedDateCurrent = formattedDate(dateCurrent);
 
   return (
-    <div className='lg:w-1/2'>
-      <div className='flex flex-col gap-3 px-6 lg:gap-5'>
-        <div className='flex flex-col items-center'>
-          <h3 className='text-2xl font-medium'>
+    <div className="lg:w-1/2">
+      <div className="flex flex-col gap-3 px-6 lg:gap-5">
+        <div className="flex flex-col items-center">
+          <h3 className="text-2xl font-medium">
             {name}, {country}
           </h3>
           <span
@@ -55,42 +55,42 @@ export function AllDates({
           </span>
         </div>
 
-        <div className='flex items-center gap-10 justify-center'>
-          <div className='flex flex-col items-center'>
-            <span className='text-sm'>Minima</span>
-            <span className='text-2xl'>{minimumTemperature}°C</span>
+        <div className="flex items-center gap-10 justify-center">
+          <div className="flex flex-col items-center">
+            <span className="text-sm">Minima</span>
+            <span className="text-2xl">{minimumTemperature}°C</span>
           </div>
 
-          <div className='flex flex-col items-center text-4xl font-semibold'>
-            <div className='w-32 h-32'>
+          <div className="flex flex-col items-center text-4xl font-semibold">
+            <div className="w-32 h-32">
               <img
                 src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
                 alt={`${description}`}
-                className='w-32'
+                className="w-32"
               />
             </div>
 
-            <p className='text-4xl font-semibold'>{currencyTemperature}°C</p>
-            <span className='text-3xl font-medium capitalize text-center'>
+            <p className="text-4xl font-semibold">{currencyTemperature}°C</p>
+            <span className="text-3xl font-medium capitalize text-center">
               {description}
             </span>
           </div>
-          <div className='flex flex-col items-center'>
-            <span className='text-sm'>Maxima</span>
-            <span className='text-2xl'>{maximumTemperature}°C</span>
+          <div className="flex flex-col items-center">
+            <span className="text-sm">Maxima</span>
+            <span className="text-2xl">{maximumTemperature}°C</span>
           </div>
         </div>
       </div>
 
-      <hr className='border my-8' />
+      <hr className="border my-8" />
 
-      <div className='flex justify-center flex-col items-center m-auto lg:w-1/2'>
-        <div className='w-full grid grid-cols-2 gap-x-8 gap-y-1 border'>
-          <span className='text-end'>Umidade</span>
+      <div className="flex justify-center flex-col items-center m-auto lg:w-1/2">
+        <div className="w-full grid grid-cols-2 gap-x-8 gap-y-1 border">
+          <span className="text-end">Umidade</span>
           <span>{humidity}%</span>
-          <span className='text-end'>Nascer do Sol</span>
+          <span className="text-end">Nascer do Sol</span>
           <span>{sunriseTime}</span>
-          <span className='text-end'>Por do sol</span>
+          <span className="text-end">Por do sol</span>
           <span>{sunsetTime}</span>
         </div>
 

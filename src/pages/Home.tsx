@@ -16,7 +16,7 @@ export function Home() {
 
   const handleInput = () => {
     getCityName(inputValue);
-    //console.log(cityName);
+
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,7 +24,6 @@ export function Home() {
       if (buttonRef.current) {
         buttonRef.current.click();
       }
-      // console.log('Enter was pressed');
     }
   };
 

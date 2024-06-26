@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorege';
 
 type CityProviderProps = {
@@ -23,8 +23,10 @@ export const CityProvider = ({ children }: CityProviderProps) => {
     return setCityName(name);
   }
 
+  const value = useMemo(() => ({ cityName, getCityName }), [cityName, getCityName]);
+
   return (
-    <CityContext.Provider value={{ cityName, getCityName }}>
+    <CityContext.Provider value={value}>
       {children}
     </CityContext.Provider>
   );
