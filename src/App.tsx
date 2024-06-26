@@ -8,8 +8,6 @@ import { Router } from './Router';
 export default function App() {
   const { isActiveMode } = useActiveMode();
 
-  //console.log(isActiveMode);
-
   return (
     <div
       className={clsx('flex items-center justify-center h-screen', {
