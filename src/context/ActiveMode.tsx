@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
 type ActiveModeProviderProps = {
   children: ReactNode;
@@ -23,9 +23,12 @@ export const ActiveModeProvider = ({ children }: ActiveModeProviderProps) => {
   const activeLight = () => setIsActiveLight(true);
   const isActiveMode = isActiveLight;
 
-  return (
-    <ActiveContext.Provider value={{ activeDark, activeLight, isActiveMode }}>
-      {children}
-    </ActiveContext.Provider>
+  return useMemo(
+    () => (
+      <ActiveContext.Provider value={{ activeDark, activeLight, isActiveMode }}>
+        {children}
+      </ActiveContext.Provider>
+    ),
+    [activeDark, activeLight, isActiveMode],
   );
 };
